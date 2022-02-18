@@ -1,0 +1,11 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(* 
+	Sigmoid Activation Layer
+*)
+FUNCTION_BLOCK PUBLIC Sigmoid_L IMPLEMENTS Activation
+VAR
+	// Input and Output dataMem variables
+	input_i: dataMem;
+	output_i: dataMem;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)

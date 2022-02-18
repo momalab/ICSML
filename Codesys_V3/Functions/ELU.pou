@@ -1,0 +1,19 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Exponential Linear Unit (ELU).
+	
+	Parameters:
+		alpha: ELU alpha parameter for defining scaling of the function when input < 0
+*)
+FUNCTION ELU : REAL
+VAR_INPUT
+	input: REAL;
+	alpha: REAL := 1;
+END_VAR
+
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+IF input > 0 THEN
+	ELU := input;
+ELSE
+	ELU := alpha * (EXP(input) - 1);
+END_IF

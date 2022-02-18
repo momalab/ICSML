@@ -1,0 +1,15 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Leaky Rectified Linear Unit (ReLU) activation function.
+*)
+FUNCTION LRELU : REAL
+VAR_INPUT
+	input: REAL;
+END_VAR
+
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+IF input >= 0 THEN
+	LRELU := input;
+ELSE
+	LRELU := 0.01 * input;
+END_IF

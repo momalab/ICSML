@@ -1,0 +1,10 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(* 
+Sigmoid Function
+*)
+FUNCTION SIG : REAL
+VAR_INPUT
+	input: REAL;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+SIG := 1 / (1+EXP(-input));

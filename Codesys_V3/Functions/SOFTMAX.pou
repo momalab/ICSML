@@ -1,0 +1,29 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Softmax Activation Function.
+	
+	Parameters:
+		input: Array of REAL to calculate the probability distribution on.
+		output: Array of REAL to store results.
+*)
+FUNCTION SOFTMAX : INT
+VAR_INPUT
+	input: POINTER TO REAL;
+	output: POINTER TO REAL;
+	length: DINT;
+END_VAR
+VAR
+	sum: REAL := 0;
+	index: DINT;
+END_VAR
+
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+// Calculate sum of EXP(input[index])
+FOR index := 0 TO length-1 DO
+	sum := sum + EXP(input[index]);
+END_FOR
+
+// Calculate probabilities
+FOR index := 0 TO length-1 DO
+	output[index] := EXP(input[index]) / sum;
+END_FOR

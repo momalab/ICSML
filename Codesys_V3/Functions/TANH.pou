@@ -1,0 +1,11 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Tanh activation function.
+*)
+FUNCTION TANH : REAL
+VAR_INPUT
+	input: REAL;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+//TANH := 2 * SIG(2*input) - 1;
+TANH := (2 / (1 + EXP(-2*input))) - 1;

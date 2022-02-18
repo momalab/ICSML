@@ -1,0 +1,19 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Rectified Linear Unit (ReLU) activation function.
+	
+	Parameters:
+		alpha: Slope to multiply input with if input is less than 0. Default is 0.
+*)
+FUNCTION RELU : REAL
+VAR_INPUT
+	input: REAL;
+	alpha: REAL := 0;
+END_VAR
+
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+IF input >= 0 THEN
+	RELU := input;
+ELSE
+	RELU := input * alpha;
+END_IF

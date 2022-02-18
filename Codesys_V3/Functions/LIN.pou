@@ -1,0 +1,11 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Linear Activation Function with slope.
+*)
+FUNCTION LIN : REAL
+VAR_INPUT
+	input: REAL;
+	slope: REAL := 1;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+LIN := slope * input;

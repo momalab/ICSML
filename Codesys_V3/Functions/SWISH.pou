@@ -1,0 +1,11 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Swish Activation Function.
+*)
+FUNCTION SWISH : REAL
+VAR_INPUT
+	input: REAL;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+//SWISH := input * SIG(input);
+SWISH := input/(1-EXP(-input));

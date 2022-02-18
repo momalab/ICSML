@@ -1,0 +1,24 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Concatenation Layer to concatenate two inputs. 
+	Number of dimensions in inputs must match. Dimension sizes in all dimensions before the concatenation axis must also match.
+	
+	Parameters:
+		input: dataMem of first array to be concatenated
+		input2: dataMem of second array to be concatenated
+		output: dataMem to store concatenation result
+		
+	Dependencies:
+		fpass method depends on the SysMem library
+*)
+FUNCTION_BLOCK PUBLIC Concatenate IMPLEMENTS Layer
+VAR
+	// Input and Output dataMem variables
+	input_i: dataMem;
+	input2_i: dataMem;
+	output_i: dataMem;
+	
+	// Array axis on which to concatenate. Starts at 0.
+	axis_i: UINT := 0;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)

@@ -1,0 +1,16 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(* 
+	Rectified Linear Unit (ReLU) Activation Layer
+	
+	Parameters:
+		alpha: Slope to multiply input with if input is less than 0. Default is 0.
+*)
+FUNCTION_BLOCK PUBLIC ReLU_L IMPLEMENTS Activation
+VAR
+	// Input and Output dataMem variables
+	input_i: dataMem;
+	output_i: dataMem;
+	// Parameterized ReLU alpha parameter
+	alpha_i: REAL := 0;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)

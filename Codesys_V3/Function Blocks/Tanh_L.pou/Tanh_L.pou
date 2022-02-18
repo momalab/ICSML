@@ -1,0 +1,11 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(* 
+	Hyperbolic Tangent (Tanh) Activation Layer
+*)
+FUNCTION_BLOCK PUBLIC Tanh_L IMPLEMENTS Activation
+VAR
+	// Input and Output dataMem variables
+	input_i: dataMem;
+	output_i: dataMem;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)

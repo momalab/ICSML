@@ -1,0 +1,21 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Dot Product calculation function
+*)
+FUNCTION DOT : REAL
+VAR_INPUT
+	vectorA: POINTER TO REAL;
+	vectorB: POINTER TO REAL;
+	length: DINT;
+END_VAR
+VAR
+	result: REAL := 0;
+	index: DINT;
+END_VAR
+
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+FOR index := 0 TO length-1 DO
+	result := result + vectorA[index] * vectorB[index];
+END_FOR
+
+DOT := result;

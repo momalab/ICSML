@@ -1,0 +1,10 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+METHOD fpass
+VAR
+	index: UINT;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+// Calculate result of swish function for each element and write it to output dataMem address
+FOR index := 0 TO input_i.length-1 DO
+	output_i.address[index] := SWISH(input_i.address[index]);
+END_FOR

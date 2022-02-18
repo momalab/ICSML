@@ -1,0 +1,14 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Binary Step Activation Function.
+*)
+FUNCTION BSTEP : REAL
+VAR_INPUT
+	input: REAL;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+IF input >= 0 THEN
+	BSTEP := 1;
+ELSE
+	BSTEP := 0;
+END_IF

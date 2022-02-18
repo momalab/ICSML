@@ -1,0 +1,16 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(* 
+	Exponential Linear Unit (ELU) Activation Layer
+	
+	Parameters:
+		alpha: Parameter to multiply the exponential term with if input is less than 0. Default is 1.
+*)
+FUNCTION_BLOCK PUBLIC ELU_L IMPLEMENTS Activation
+VAR
+	// Input and Output dataMem variables
+	input_i: dataMem;
+	output_i: dataMem;
+	// ELU alpha parameter
+	alpha_i: REAL := 1;
+END_VAR
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)

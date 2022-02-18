@@ -1,0 +1,33 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Helper function to load data from a binary file to an array. Can be used to load layer weights and biases.
+	
+	Parameters:
+		filename: Absolute path to binary file. E.g: '/home/user/weights.bin'
+		bytes: Number of bytes to read. E.g for a 6x8 LREAL matrix: 6*8*SIZEOF(LREAL)
+		dst: Pointer to array where the data should be loaded
+		err (optional): Pointer to CmpErrors.RTS_IEC_RESULT to get errors
+		
+	Depends on CmpError and SysFile libraries.
+*)
+FUNCTION BINARR : DWORD
+VAR_INPUT
+	filename: STRING;
+	bytes: DWORD;
+	dst: DWORD;
+	err: POINTER TO CmpErrors.RTS_IEC_RESULT := 0;
+END_VAR
+VAR
+	file_handle: SysFile.RTS_IEC_HANDLE;
+	bytes_read: DWORD;
+END_VAR
+
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+// Open file as read only
+file_handle := SysFileOpen(filename, SysFile.AM_READ, err);
+
+// Read and copy bytes into array
+bytes_read := SysFileRead(file_handle, dst, bytes, err);
+
+// Close file
+SysFileClose(file_handle);

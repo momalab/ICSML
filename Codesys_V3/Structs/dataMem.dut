@@ -1,0 +1,13 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(* 
+	Data Structure used to define memory areas. 
+	Used in lieu of dynamic sized array passing between objects, since that's not supported.
+*)
+TYPE dataMem :
+STRUCT
+	address: POINTER TO REAL;
+	length: UINT;
+	dimensions: POINTER TO UINT;
+	dimensions_num: UINT;
+END_STRUCT
+END_TYPE

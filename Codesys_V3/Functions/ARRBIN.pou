@@ -1,0 +1,39 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Helper function to write data from an array to a binary file. Can be used to write inference results or intermediate data.
+	
+	Parameters:
+		filename: Absolute path to binary file. If file does not exist, it will be created. E.g: '/home/user/weights.bin'.
+		bytes: Number of bytes to write. E.g for a 6x8 LREAL matrix: 6*8*SIZEOF(LREAL)
+		src: Pointer to array from where the data should be read
+		err (optional): Pointer to CmpErrors.RTS_IEC_RESULT to get errors
+		overwrite (optional): Boolean on whether writing should be done in Overwrite or Append mode (default).
+		
+	Depends on CmpError and SysFile libraries.
+*)
+FUNCTION ARRBIN : DWORD
+VAR_INPUT
+	filename: STRING;
+	bytes: DWORD;
+	src: DWORD;
+	err: POINTER TO CmpErrors.RTS_IEC_RESULT := 0;
+	overwrite: BOOL := FALSE;
+END_VAR
+VAR
+	file_handle: SysFile.RTS_IEC_HANDLE;
+	bytes_written: DWORD;
+END_VAR
+
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+// Open file in write or append mode
+IF overwrite = FALSE THEN
+	file_handle := SysFileOpen(filename, SysFile.AM_APPEND_PLUS, err);
+ELSE
+	file_handle := SysFileOpen(filename, SysFile.AM_WRITE, err);
+END_IF
+
+// Read and copy bytes into array
+bytes_written := SysFileWrite(file_handle, src, bytes, err);
+
+// Close file
+SysFileClose(file_handle);

@@ -1,0 +1,16 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE activationType :
+(
+	Linear := 0,
+	Binary := 1,
+	Sigmoid := 2,
+	Tanh := 3,
+	ReLU := 4,
+	LReLU := 5,
+	ELU := 6,
+	Swish := 7,
+	Softmax := 10
+);
+END_TYPE

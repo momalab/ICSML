@@ -1,0 +1,20 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+FUNCTION_BLOCK Dense IMPLEMENTS Layer
+VAR
+	// Input and Output dataMem variables
+	input_i: dataMem;
+	output_i: dataMem;
+	
+	// Number of Neurons and inputs is defined implicitly but the input and output dataMems
+	// Expected weights matrix dimensions: output.length x input.length
+	weights: POINTER TO REAL;
+	// Expected biases vector dimension: output.length
+	biases: POINTER TO REAL;
+	
+	// Activation Type and Parameter. Note that not all activations take a parameter.
+	activation: activationType := activationType.Linear;
+	activation_parameter: REAL := 1;
+	activation_use_parameter: BOOL := FALSE;
+END_VAR
+
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
