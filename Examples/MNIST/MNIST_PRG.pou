@@ -1,0 +1,90 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+
+PROGRAM MNIST_PRG
+VAR
+
+	// Layer weights (Dimensions: outputs x inputs)
+	dense_L1_weights: ARRAY[0..dense_L1_size*input_Size-1] OF REAL;
+	dense_L2_weights: ARRAY[0..dense_L2_size*dense_L1_size-1] OF REAL;
+	dense_L3_weights: ARRAY[0..dense_L3_size*dense_L2_size-1] OF REAL;
+	dense_L4_weights: ARRAY[0..dense_L4_size*dense_L3_size-1] OF REAL;
+	dense_overflow: ARRAY[0..18350080-1] OF REAL;
+	
+	// Layer biases
+	dense_L1_biases: ARRAY[0..dense_L1_size-1] OF REAL;
+	dense_L2_biases: ARRAY[0..dense_L2_size-1] OF REAL;
+	dense_L3_biases: ARRAY[0..dense_L3_size-1] OF REAL;
+	dense_L4_biases: ARRAY[0..dense_L4_size-1] OF REAL;
+	
+	// Memory Buffers and Dimensions Arrays for dataMem structs for each Layer
+	image_Buff: ARRAY[0..input_Size-1] OF LREAL;
+	image_Dimensions: ARRAY[0..0] OF UINT := [input_Size];
+	input_Buff: ARRAY[0..input_Size-1] OF REAL;
+	input_Dimensions: ARRAY[0..0] OF UINT := [input_Size];
+	dense_L1_Buff: ARRAY[0..dense_L1_Size-1] OF REAL;
+	dense_L1_Dimensions: ARRAY[0..0] OF UINT := [dense_L1_Size];
+	dense_L2_Buff: ARRAY[0..dense_L2_Size-1] OF REAL;
+	dense_L2_Dimensions: ARRAY[0..0] OF UINT := [dense_L2_Size];
+	dense_L3_Buff: ARRAY[0..dense_L3_Size-1] OF REAL;
+	dense_L3_Dimensions: ARRAY[0..0] OF UINT := [dense_L3_Size];
+	dense_L4_Buff: ARRAY[0..dense_L4_Size-1] OF REAL;
+	dense_L4_Dimensions: ARRAY[0..0] OF UINT := [dense_L4_Size];
+	
+	// dataMem structures for each layer
+	image_dataMem: ICSML.dataMem := (address:=ADR(image_Buff), length:=input_Size, dimensions:=ADR(image_Dimensions), dimensions_num:=1);
+	input_dataMem: ICSML.dataMem := (address:=ADR(input_Buff), length:=input_Size, dimensions:=ADR(input_Dimensions), dimensions_num:=1);
+	dense_L1_dataMem: ICSML.dataMem := (address:=ADR(dense_L1_Buff), length:=dense_L1_Size, dimensions:=ADR(dense_L1_Dimensions), dimensions_num:=1);
+	dense_L2_dataMem: ICSML.dataMem := (address:=ADR(dense_L2_Buff), length:=dense_L2_Size, dimensions:=ADR(dense_L2_Dimensions), dimensions_num:=1);
+	dense_L3_dataMem: ICSML.dataMem := (address:=ADR(dense_L3_Buff), length:=dense_L3_Size, dimensions:=ADR(dense_L3_Dimensions), dimensions_num:=1);
+	dense_L4_dataMem: ICSML.dataMem := (address:=ADR(dense_L4_Buff), length:=dense_L4_Size, dimensions:=ADR(dense_L4_Dimensions), dimensions_num:=1);
+	
+	// Define, Configure and Wire Layers
+	input_layer: ICSML.Input := (input:=image_dataMem, output:=input_dataMem);
+	dense_L1_layer: ICSML.Dense := (input:=input_layer.output, output:=dense_L1_dataMem, weights:=ADR(dense_L1_weights), biases:=ADR(dense_L1_biases), activation:=ICSML.activationType.ReLU);
+	dense_L2_layer: ICSML.Dense := (input:=dense_L1_layer.output, output:=dense_L2_dataMem, weights:=ADR(dense_L2_weights), biases:=ADR(dense_L2_biases), activation:=ICSML.activationType.ReLU);
+	dense_L3_layer: ICSML.Dense := (input:=dense_L2_layer.output, output:=dense_L3_dataMem, weights:=ADR(dense_L3_weights), biases:=ADR(dense_L3_biases), activation:=ICSML.activationType.ReLU);
+	dense_L4_layer: ICSML.Dense := (input:=dense_L3_layer.output, output:=dense_L4_dataMem, weights:=ADR(dense_L4_weights), biases:=ADR(dense_L4_biases));
+	
+	// Model array
+	layers_array: ARRAY[0..4] OF ICSML.Layer := [input_layer, dense_L1_layer, dense_L2_layer, dense_L3_layer, dense_L4_layer];
+	Model: ICSML.Sequential := (layers:=ADR(layers_array), layers_num:=DINT_TO_INT(UPPER_BOUND(layers_array, 1)+1));
+	
+	// Inference loop variables
+	index: DINT;
+END_VAR
+
+VAR CONSTANT
+	// Input and label sizes
+	input_Size: UINT := 28*28;
+	label_Size: UINT := 1;
+	
+	// Dense layer sizes
+	dense_L1_Size: UINT := 256;
+	dense_L2_Size: UINT := 512;
+	dense_L3_Size: UINT := 256;
+	dense_L4_Size: UINT := 10;
+
+END_VAR
+
+
+(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+
+// Load Weights and Biases
+ICSML.BINARR('/home/debian/plc_mnist_weights_float32/L1_weights.bin', dense_L1_size * input_Size * SIZEOF(REAL), ADR(dense_L1_weights));
+ICSML.BINARR('/home/debian/plc_mnist_weights_float32/L2_weights.bin', dense_L2_size * dense_L1_size * SIZEOF(REAL), ADR(dense_L2_weights));
+ICSML.BINARR('/home/debian/plc_mnist_weights_float32/L3_weights.bin', dense_L3_size * dense_L2_size * SIZEOF(REAL), ADR(dense_L3_weights));
+ICSML.BINARR('/home/debian/plc_mnist_weights_float32/L4_weights.bin', dense_L4_size * dense_L3_size * SIZEOF(REAL), ADR(dense_L4_weights));
+
+ICSML.BINARR('/home/debian/plc_mnist_weights_float32/L1_biases.bin', dense_L1_size * SIZEOF(REAL), ADR(dense_L1_biases));
+ICSML.BINARR('/home/debian/plc_mnist_weights_float32/L2_biases.bin', dense_L2_size * SIZEOF(REAL), ADR(dense_L2_biases));
+ICSML.BINARR('/home/debian/plc_mnist_weights_float32/L3_biases.bin', dense_L3_size * SIZEOF(REAL), ADR(dense_L3_biases));
+ICSML.BINARR('/home/debian/plc_mnist_weights_float32/L4_biases.bin', dense_L4_size * SIZEOF(REAL), ADR(dense_L4_biases));
+
+// Load external input data from binary file.
+ICSML.BINARR('/home/debian/PLCML/plc_mnist/0_img.bin', input_Size * SIZEOF(LREAL), ADR(image_Buff));
+
+// Inference
+Model.evaluate();
+
+// File Output: Open, Write and Close File
+ICSML.ARRBIN('/home/debian/PLCML/plc_mnist/0_results.bin', dense_L4_Size * SIZEOF(REAL), ADR(dense_L4_Buff));
