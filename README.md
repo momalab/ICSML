@@ -41,7 +41,7 @@ For ICSML implementations on various PLC ecosystems take a look at the [Releases
 ## Cite ICSML
 The paper describing ICSML is available on [arXiv](https://arxiv.org/abs/2202.10075). If you use ICSML in your work feel free to cite us:
 
-Constantine Doumanidis, Prashant Hari Narayan Rajput, and Michail Maniatakos. "IICSML: Industrial Control Systems Machine Learning inference framework natively executing on IEC 61131-3 languages", arXiv:2202.10075.
+Constantine Doumanidis, Prashant Hari Narayan Rajput, and Michail Maniatakos. "ICSML: Industrial Control Systems Machine Learning inference framework natively executing on IEC 61131-3 languages", arXiv:2202.10075.
 
 BibTex Citation:
 ```
