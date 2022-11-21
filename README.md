@@ -21,6 +21,8 @@ ICSML provides parameterizable implementations for the following Activation Func
 
 ### Layers & Data Structures
 - Dense Layers: Used to create Neural Networks. Can optionally apply an activation function to their outputs.
+- Convolution Layers: Used to convolve inputs with kernels.
+- Batch Normalization Layers: Used to re-center and re-scale inputs.
 - Concatenation Layers: Combine the outputs of their inputs and can be used to build ML models with parallel sections that branch out and merge.
 - Activation Layers: Apply an activation function to their inputs.
 - dataMem Data Structure: Offers a convenient way to manage Layer memory by associating memory areas with their metadata.
