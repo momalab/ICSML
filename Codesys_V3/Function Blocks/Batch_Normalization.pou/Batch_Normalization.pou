@@ -1,0 +1,22 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+FUNCTION_BLOCK Batch_Normalization IMPLEMENTS Layer
+VAR
+	// Input and Output dataMem variables
+	input_i: dataMem; //_i: internal
+	output_i: dataMem;
+	
+	// Number of Neurons and inputs is defined implicitly but the input and output dataMems
+	// Expected weights matrix dimensions: 4 (gamma, beta, moving average, moving variance) x number of input channels
+	weights: POINTER TO REAL;
+	
+	// Whether or not to consider the last dimension of the input dataMem as the channels dimension. If this is true,
+	// every channel will have its own weights parameters applied to it. If false, the full input will be treated 
+	// using a single set of the 4 weights parameters.
+	use_channels: BOOL := FALSE;
+	
+	
+	// Activation Type and Parameter. Note that not all activations take a parameter.
+	activation: activationType := activationType.Linear;
+	activation_parameter: REAL := 1;
+	activation_use_parameter: BOOL := FALSE;
+END_VAR(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)

@@ -1,0 +1,40 @@
+(*#-#-#-#-#-#-#-#-#-#---Declaration---#-#-#-#-#-#-#-#-#-#-#-#-#*)
+(*
+	Convolution Layer to convolve filters over inputs. 
+	Note: For now supports square filters
+	
+	Parameters:
+		input: dataMem of the input data. Data is shaped as (rows, columns, channels)
+		output: dataMem to store concatenation result. Data is shaped as (rows, columns, num_filters)
+		weights: Convolution filters stored in the format (filter_num, channel_num, rows, columns)
+		biases: Convolution filters stored in the format (filter_num)
+		num_filt: Number of filters
+		filt_size: Dimension of square filter
+		stride: Stride size
+
+*)
+
+FUNCTION_BLOCK Convolution IMPLEMENTS Layer
+VAR
+	// Input and Output dataMem variables
+	input_i: dataMem; //_i: internal
+	output_i: dataMem;
+	
+	// Number of Neurons and inputs is defined implicitly but the input and output dataMems
+	// Expected weights matrix dimensions: output.length x input.length
+	weights: POINTER TO REAL;
+	// Expected biases vector dimension: output.length
+	biases: POINTER TO REAL;
+	//Number of filters
+	num_filt: UINT;
+	//Filter size
+	filt_size: UINT;
+	//Stride
+	stride: UINT;
+	
+	
+	// Activation Type and Parameter. Note that not all activations take a parameter.
+	activation: activationType := activationType.Linear;
+	activation_parameter: REAL := 1;
+	activation_use_parameter: BOOL := FALSE;
+END_VAR(*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
