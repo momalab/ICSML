@@ -20,7 +20,7 @@ def normalize_img(image, label):
 
 def np_flatten_img(image, label):
     """Flattens image"""
-    return tf.reshape(image, [1, 784]), label
+    return tf.reshape(image, (-1,)), label
 
 
 ds_train = ds_train.map(
