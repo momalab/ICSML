@@ -41,18 +41,18 @@ Porting ICSML to a new PLC ecosystem that adheres to the IEC 61131-3 standard is
 For ICSML implementations on various PLC ecosystems take a look at the [Releases](https://github.com/momalab/ICSML/releases/) page.
 
 ## Cite ICSML
-The paper describing ICSML is available on [arXiv](https://arxiv.org/abs/2202.10075). If you use ICSML in your work feel free to cite us:
+A copy of the ICSML paper can be found on [arXiv](https://arxiv.org/abs/2202.10075). If you use ICSML in your work feel free to cite us:
 
-Constantine Doumanidis, Prashant Hari Narayan Rajput, and Michail Maniatakos. "ICSML: Industrial Control Systems Machine Learning inference framework natively executing on IEC 61131-3 languages", arXiv:2202.10075.
+Doumanidis, Constantine, Prashant Hari Narayan Rajput, and Michail Maniatakos. "ICSML: Industrial Control Systems ML Framework for native inference using IEC 61131-3 code." Proceedings of the 9th ACM Cyber-Physical System Security Workshop. 2023.
 
 BibTex Citation:
 ```
-@misc{doumanidis2022icsml,
-      title={ICSML: Industrial Control Systems Machine Learning inference framework natively executing on IEC 61131-3 languages}, 
-      author={Constantine Doumanidis and Prashant Hari Narayan Rajput and Michail Maniatakos},
-      year={2022},
-      eprint={2202.10075},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+@inproceedings{doumanidis2023icsml,
+  title={ICSML: Industrial Control Systems ML Framework for native inference using IEC 61131-3 code},
+  author={Doumanidis, Constantine and Rajput, Prashant Hari Narayan and Maniatakos, Michail},
+  booktitle={Proceedings of the 9th ACM Cyber-Physical System Security Workshop},
+  pages={60--71},
+  year={2023}
 }
+
 ```
