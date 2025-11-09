@@ -11,17 +11,17 @@ model = h5py.File('dense-256-512-256.h5', 'r')
 # Get weights. Note weight matrices are transposed because the PLC ML Inference Framework reads weights that way
 weights = model['model_weights']
 
-L1_biases = np.array(weights['dense']['dense']['bias:0'], dtype='float64')
-L1_weights = np.array(weights['dense']['dense']['kernel:0'], dtype='float64').transpose()
+L1_biases = np.array(weights['dense']['sequential']['dense']['bias'], dtype='float64')
+L1_weights = np.array(weights['dense']['sequential']['dense']['kernel'], dtype='float64').transpose()
 
-L2_biases = np.array(weights['dense_1']['dense_1']['bias:0'], dtype='float64')
-L2_weights = np.array(weights['dense_1']['dense_1']['kernel:0'], dtype='float64').transpose()
+L2_biases = np.array(weights['dense_1']['sequential']['dense_1']['bias'], dtype='float64')
+L2_weights = np.array(weights['dense_1']['sequential']['dense_1']['kernel'], dtype='float64').transpose()
 
-L3_biases = np.array(weights['dense_2']['dense_2']['bias:0'], dtype='float64')
-L3_weights = np.array(weights['dense_2']['dense_2']['kernel:0'], dtype='float64').transpose()
+L3_biases = np.array(weights['dense_2']['sequential']['dense_2']['bias'], dtype='float64')
+L3_weights = np.array(weights['dense_2']['sequential']['dense_2']['kernel'], dtype='float64').transpose()
 
-L4_biases = np.array(weights['dense_3']['dense_3']['bias:0'], dtype='float64')
-L4_weights = np.array(weights['dense_3']['dense_3']['kernel:0'], dtype='float64').transpose()
+L4_biases = np.array(weights['dense_3']['sequential']['dense_3']['bias'], dtype='float64')
+L4_weights = np.array(weights['dense_3']['sequential']['dense_3']['kernel'], dtype='float64').transpose()
 
 # Create weights and biases directory
 if not os.path.exists('plc_mnist_weights'):

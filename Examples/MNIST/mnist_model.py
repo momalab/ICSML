@@ -20,7 +20,7 @@ def normalize_img(image, label):
 
 def np_flatten_img(image, label):
     """Flattens image"""
-    return tf.reshape(image, [1, 784]), label
+    return tf.reshape(image, (-1,)), label
 
 
 ds_train = ds_train.map(
@@ -42,7 +42,7 @@ ds_test = ds_test.prefetch(tf.data.AUTOTUNE)
 
 # Create Model
 model = tf.keras.models.Sequential([
-    tf.keras.layers.InputLayer(input_shape=(784, )),
+    tf.keras.layers.InputLayer(shape=(784, )),
     tf.keras.layers.Dense(256, activation='relu'),
     tf.keras.layers.Dense(512, activation='relu'),
     tf.keras.layers.Dense(256, activation='relu'),
