@@ -8,4 +8,4 @@ VAR_INPUT
 END_VAR
 (*#-#-#-#-#-#-#-#-#-#---Implementation---#-#-#-#-#-#-#-#-#-#-#-#-#*)
 //SWISH := input * SIG(input);
-SWISH := input/(1-EXP(-input));
+SWISH := input/(1+EXP(-input));
